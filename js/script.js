@@ -16,37 +16,46 @@ document.addEventListener('DOMContentLoaded', function () {
     light.position.set(1, 1, 1).normalize();
     scene.add(light);
 
-    // Crea la figura 3D (es. un cubo)
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+    // Carica il modello .glb
+    const loader = new THREE.GLTFLoader();
+    loader.load('3d/edificio.glb', function (gltf) {
+        const model = gltf.scene;
+        scene.add(model);
 
-    document.getElementById('index-button').addEventListener('click', () => {
-        camera.position.x = 0;
-        camera.position.y = 0;
+        // Funzione di animazione aggiornata
+        function animate() {
+            requestAnimationFrame(animate);
+            model.rotation.x += 0.01; // Ruota il modello
+            model.rotation.y += 0.01; // Ruota il modello
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+    }, undefined, function (error) {
+        console.error(error);
     });
-    document.getElementById('projects-button').addEventListener('click', () => {
-        camera.position.x = 2;
-        camera.position.y = 0;
-    });
-    document.getElementById('contact-button').addEventListener('click', () => {
-        camera.position.x = -2;
-        camera.position.y = 0;
-    });
 
-    // Funzione di animazione
-    function animate() {
-        requestAnimationFrame(animate);
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
-        renderer.render(scene, camera);
+    //camera.position.x = 0;
+    //camera.position.y = 0;
 
-        //console.log('animate');
-
+    function loadContent(file) {
+        fetch(file)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('content').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading content:', error));
     }
 
-    animate();
+    document.getElementById('index-button').addEventListener('click', () => {
+        loadContent('home.html');
+    });
+    document.getElementById('projects-button').addEventListener('click', () => {
+        loadContent('projects.html');
+    });
+    document.getElementById('contact-button').addEventListener('click', () => {
+        loadContent('contact.html');
+    });
 });
 
 function showLargeImage(img) {
