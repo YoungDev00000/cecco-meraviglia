@@ -1,8 +1,50 @@
        /* General styles */
-       body {
+    body {
         margin: 0;
         font-family: Arial, sans-serif;
         overflow-x: hidden;
+    }
+
+    .custom-link {
+        font-family: 'Verdana', sans-serif;
+        font-size: 14px;
+        color: red;
+    }
+
+    .nome {
+        position: absolute;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        top: 10px; 
+        left: 10px;
+        line-height: 1.5; 
+        text-align: left; 
+        color: rgb(255, 0, 0);
+    }
+
+    .mestiere {
+        position: absolute;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        top: 10px; /* Distanza dall'alto */
+        left: 120px; /* Distanza da sinistra */
+        line-height: 1.5; /* Spaziatura tra le righe */
+        text-align: left; /* Allineamento del testo */
+        color: rgb(255, 0, 0);
+    }
+
+    .contatti {
+        position: absolute;
+        font-family: Arial, sans-serif;
+        margin: 0; /* Rimuove margini predefiniti */
+        height: 100vh; /* L'altezza è pari all'intera finestra */
+        display: flex; /* Attiva il layout flexbox */
+        justify-content: center; /* Centra il contenuto orizzontalmente */
+        align-items: center; /* Centra il contenuto verticalmente */
+        font-size: 14px;
+        line-height: 1.5; /* Spaziatura tra le righe */
+        text-align: center; /* Allineamento del testo */
+        color: rgb(255, 0, 0);
     }
 
     header {
@@ -50,6 +92,7 @@
     /* Projects Page */
     #projects {
         margin-top: 50px;
+        position: absolute
     }
 
     .project {
@@ -106,14 +149,7 @@
 
     /* Contact Page */
     #contact {
+        position: absolute;
         text-align: center;
         padding: 20px;
-    }
-
-    #contact a {
-        display: block;
-        margin: 10px 0;
-        text-decoration: none;
-        font-size: 18px;
-        color: blue;
     }
