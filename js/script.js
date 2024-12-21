@@ -6,27 +6,23 @@ document.addEventListener('DOMContentLoaded', function () {
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 5;
 
-    // Crea il renderer
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
-    // Aggiungi una luce alla scena
     const light = new THREE.DirectionalLight(0xffffff, 1);
     light.position.set(1, 1, 1).normalize();
     scene.add(light);
 
-    // Carica il modello .glb
     const loader = new THREE.GLTFLoader();
     loader.load('3d/edificio.glb', function (gltf) {
         const model = gltf.scene;
         scene.add(model);
 
-        // Funzione di animazione aggiornata
         function animate() {
             requestAnimationFrame(animate);
-            model.rotation.x += 0.01; // Ruota il modello
-            model.rotation.y += 0.01; // Ruota il modello
+            model.rotation.x += 0.005; // Ruota il modello
+            model.rotation.y += 0.005; // Ruota il modello
             renderer.render(scene, camera);
         }
         
@@ -34,9 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }, undefined, function (error) {
         console.error(error);
     });
-
-    //camera.position.x = 0;
-    //camera.position.y = 0;
 
     function loadContent(file) {
         fetch(file)

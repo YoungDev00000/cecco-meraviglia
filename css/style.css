@@ -50,6 +50,39 @@
         color: rgb(255, 0, 0);
     }
 
+    .projects-container {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width:  50%;
+        height: 100vh;
+    }
+
+    .project-brand {
+        margin: 10px 0;
+        text-decoration: none;
+        font-size: 20px;
+        color: rgb(255, 0, 0);
+    }
+
+    .image-list {
+        display: none;
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 25%;
+        height: 100%;
+        overflow-y: auto;
+        background-color: white;
+    }
+    .image-list img {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
     header {
         position: fixed;
         top: 0;
@@ -102,12 +135,6 @@
         display: flex;
         padding: 20px;
         margin-bottom: 20px;
-    }
-
-    .project-brand {
-        flex: 1;
-        font-weight: bold;
-        color: red;
     }
 
     .project-description {
