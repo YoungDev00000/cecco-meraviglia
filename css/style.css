@@ -58,6 +58,7 @@
         justify-content: center;
         width:  50%;
         height: 100vh;
+        z-index: 10;
     }
 
     .project-brand {
@@ -69,18 +70,18 @@
 
     .image-list {
         display: none;
-        position: fixed;
+        position: absolute;
         right: 0;
         top: 0;
-        width: 25%;
-        height: 100%;
-        overflow-y: auto;
-        background-color: white;
+        width: 70%;
+        height: 100vh; /* Altezza fissa */
+        overflow-y: scroll; /* Abilita lo scrolling verticale */
+        scrollbar-width: none; /* Per Firefox */
+        -ms-overflow-style: none;  /* Per Internet Explorer e Edge */
     }
-    .image-list img {
-        display: block;
-        width: 100%;
-        margin-bottom: 10px;
+
+    .image-list::-webkit-scrollbar {
+        display: none; /* Per Chrome, Safari e Opera */
     }
 
     header {
