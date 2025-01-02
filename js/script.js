@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     scene.add(ambientLight);
 
     const loader = new THREE.GLTFLoader();
-    loader.load('3d/cranio.glb', function (gltf) {
+    loader.load('3d/cranio6.glb', function (gltf) {
         const model = gltf.scene;
         scene.add(model);
 
@@ -108,35 +108,51 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error(error);
     });
 
+    function addMenuEventListeners() {
+        document.querySelectorAll('#index-button').forEach(button => {
+            button.addEventListener('click', () => {
+                loadContent('home.html');
+            });
+        });
+
+        document.querySelectorAll('#projects-button').forEach(button => {
+            button.addEventListener('click', () => {
+                loadContent('projects.html', function() {
+                    showList('biasia');
+                    showList('coeval');
+                    showList('espiazione');
+                    showList('junk');
+                    showList('maxMara');
+                    showList('spaziox');
+                    showList('tm8');
+                    showList('vemecell');
+                    showList('webEyewear');
+                    showList('personal');
+                });
+            });
+        });
+
+        document.querySelectorAll('#contact-button').forEach(button => {
+            button.addEventListener('click', () => {
+                loadContent('contact.html');
+            });
+        });
+    }
+
+    addMenuEventListeners();
+
     function loadContent(url, callback = () => {}) {
         fetch(url)
             .then(response => response.text())
             .then(html => {
                 document.getElementById('content').innerHTML = html;
                 callback();
+                addMenuEventListeners(); // Riassegna gli eventi click dopo il caricamento del contenuto
             })
             .catch(error => {
                 console.error('Error loading content:', error);
             });
     }
-
-    
-    document.getElementById('index-button').addEventListener('click', () => {
-        loadContent('home.html');
-    });
-
-    document.getElementById('projects-button').addEventListener('click', () => {
-        loadContent('projects.html', function() {
-            showList('biasia');
-            showList('vemecell');
-            showList('tm8');
-            showList('maxMara');
-            });
-    });
-
-    document.getElementById('contact-button').addEventListener('click', () => {
-        loadContent('contact.html');
-    });
 });
 
 function showLargeImage(img) {
@@ -164,7 +180,7 @@ function showList(brand) {
     });
 }
 
-function hideAllLists() {
+function hideAllLists() { //awa
     const lists = document.querySelectorAll('.image-list');
     lists.forEach(list => {
         list.style.display = 'none';
