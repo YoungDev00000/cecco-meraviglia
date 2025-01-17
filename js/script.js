@@ -172,15 +172,15 @@ function showLargeImage(img) {
     document.body.appendChild(largeImageContainer);
 }
 
-function showList(brand) {
+/*function showList(brand) {
     document.getElementById(brand).addEventListener('click', function(event) {
         event.preventDefault();
         hideAllLists();
         document.getElementById(brand + '-images').style.display = 'block';
     });
-}
+}*/
 
-function hideAllLists() { //awa
+function hideAllLists() {
     const lists = document.querySelectorAll('.image-list');
     lists.forEach(list => {
         list.style.display = 'none';

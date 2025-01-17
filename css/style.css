@@ -1,4 +1,4 @@
-       /* General styles */
+/* General styles */
     body {
         margin: 0;
         font-family: Arial, sans-serif;
@@ -17,7 +17,7 @@
     }
 
     .header-francesco {
-        font-family: Arial, sans-serif;
+        font-family: 'Whyte-Medium', sans-serif;
         font-size: 14px;
         line-height: 1.5; 
         text-align: center; 
@@ -25,11 +25,12 @@
     }
 
     .menu-top {
-        font-family: Arial, sans-serif;
+        font-family: 'Whyte-Medium', sans-serif;
         font-size: 14px;
         line-height: 1.5; 
         text-align: center; 
         color: rgb(255, 0, 0);
+        z-index: 10;
     }
 
     .menu-top:hover {
@@ -37,11 +38,19 @@
     }
 
     .menu-bottom {
-        font-family: Arial, sans-serif;
+        bottom: 70px;
+        width: 100%;
+        position: absolute;
+        font-family: 'Whyte-Medium', sans-serif;
         font-size: 14px;
         line-height: 1.5; 
         text-align: center; 
         color: rgb(255, 0, 0);
+        z-index: 10;
+    }
+
+    .menu-bottom .col:hover {
+        text-decoration: underline;
     }
 
     .links-container {
@@ -50,19 +59,20 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width:  100%;
+        width: 100%;
         height: 90%;
-        z-index: 10;
+        z-index: 5; /* Livello più basso */
         margin-top: 50px;
     }
     
     .contatti {
         margin: 10px 0;
         text-decoration: none;
-        font-size: 18px;
+        font-size: 14px;
         color: rgb(255, 0, 0);
         background-color: transparent;
         border: none;
+        font-family: 'Whyte-Medium', sans-serif;
     }
 
     .contatti:hover {
@@ -120,19 +130,12 @@
         border: none;
     }
 
-    header {
-        position: fixed;
-        top: 0;
-        right: 0;
-        padding: 10px;
-        z-index: 10;
-    }
-
     header a {
         margin-left: 15px;
         text-decoration: none;
         font-size: 16px;
         color: black;
+        z-index: 10;
     }
 
     /* Home Page Styles */
@@ -240,7 +243,7 @@
         transform: translate(-50%, -50%);
         font-size: 3em;
         color: red;
-        animation: flash 1s infinite;
+        animation: flash 2s infinite;
         pointer-events: none; /* Rendi la scritta non interagibile */
     }
 
@@ -277,8 +280,95 @@
         left: 0;
         width: 100%;
         height: 100%;
+        /* Rimuovi pointer-events: none; */
+    }
+    .overlay-container .row {
+        pointer-events: auto; /* Mantieni l'interazione sugli elementi */
+    }
+
+    @media (max-width: 768px) {
+        .home-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .fotoProfilo-sm {
+            width: 60px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            
+        }
+
+        .flash-text {
+            font-size: 16px;;
+        }
+    }
+
+    .fotoProfilo-lg {
+        width: 90px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        
+    }
+
+    .overlay-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         pointer-events: none;
     }
+
     .overlay-container .row {
         pointer-events: auto;
     }
+
+    .icon-container {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .francesco-datos-sm {
+        margin: 0;
+        padding: 0;
+        line-height: 1.25; /* Imposta l'altezza della linea per ridurre lo spazio verticale */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+        text-align: left; 
+        color: rgb(255, 0, 0);
+        font-size: 12px;
+        font-family: 'Whyte-Medium', sans-serif;
+    }
+
+    .graphic-designer-sm {
+        margin: 0;
+        padding: 0;
+        line-height: 1; /* Imposta l'altezza della linea per ridurre lo spazio verticale */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+        text-align: left; 
+        color: rgb(255, 0, 0);
+        font-family: 'Whyte-Medium', sans-serif;
+        font-size: 9px;
+    }
+
+    /* Importa il font Whyte-Medium */
+    @font-face {
+        font-family: 'Whyte-Medium';
+        src: url('../font/Whyte-Medium.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+html, body {
+    overflow: hidden; /* Disabilita lo scrolling */
+}
