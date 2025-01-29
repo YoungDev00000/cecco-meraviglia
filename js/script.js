@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const scene = new THREE.Scene();
 
     // Crea la camera
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 3;
 
     const renderer = new THREE.WebGLRenderer();
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     scene.add(ambientLight);
 
     const loader = new THREE.GLTFLoader();
-    loader.load('3d/cranio6.glb', function (gltf) {
+    loader.load('3d/cranio5.glb', function (gltf) {
         const model = gltf.scene;
         scene.add(model);
 

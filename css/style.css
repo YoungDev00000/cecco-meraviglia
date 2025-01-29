@@ -31,10 +31,12 @@
         text-align: center; 
         color: rgb(255, 0, 0);
         z-index: 10;
+        cursor: pointer; /* Aggiungi questa proprietà */
     }
 
     .menu-top:hover {
         text-decoration: underline;
+        cursor: pointer;
     }
 
     .menu-bottom {
@@ -334,12 +336,10 @@
     }
 
     .francesco-datos-sm {
-        margin: 0;
-        padding: 0;
         line-height: 1.25; /* Imposta l'altezza della linea per ridurre lo spazio verticale */
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        align-items: center;
         height: 100%;
         text-align: left; 
         color: rgb(255, 0, 0);
@@ -371,4 +371,35 @@
 
 html, body {
     overflow: hidden; /* Disabilita lo scrolling */
+}
+
+#container {
+    width: 100%;
+    font-size: 18px;
+    font-family: 'Whyte-Medium', sans-serif;
+    position: absolute;
+    overflow: hidden;
+    white-space: nowrap;
+    color: rgb(255, 0, 0);
+    margin-bottom: 20px;
+    letter-spacing: 2px; /* Aumenta la spaziatura tra i caratteri */
+    bottom: 0;
+}
+#container .scroll {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: fit-content;
+    white-space: nowrap;
+    animation: loop 30s linear infinite;
+}
+.fade {
+    width: 100%;
+    position: absolute;
+    inset: 0;
+    pointer-event: none;
+}
+@keyframes loop {
+    0% {transform: translateX(0%);}
+    100% {transform: translateX(-50%);}
 }
