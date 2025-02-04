@@ -1,3 +1,7 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
 document.addEventListener('DOMContentLoaded', function () {
     // Crea la scena
     const scene = new THREE.Scene();
@@ -108,6 +112,86 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error(error);
     });
 
+    let brandNames = [];
+    let brandData = {};
+    let currentBrandIndex = 0;
+
+    function updateBrandContent() {
+        const brandTitleElement = document.querySelector('.brand-title');
+        if (brandTitleElement && brandNames.length > 0) {
+            brandTitleElement.innerHTML = ''; // Clear existing content
+            brandNames.forEach((brand, index) => {
+                const brandNameElement = document.createElement('div');
+                brandNameElement.textContent = brand;
+                brandNameElement.style.cursor = 'pointer';
+                brandNameElement.addEventListener('click', () => {
+                    currentBrandIndex = index;
+                    updateBrandDetails();
+                    document.querySelectorAll('.brand-title div').forEach(el => {
+                        el.style.transform = 'translateX(0)'; // Reset transform for all elements
+                    });
+                    brandNameElement.style.transform = 'translateX(20px)'; // Move clicked element
+                });
+                brandTitleElement.appendChild(brandNameElement);
+            });
+            updateBrandDetails();
+        }
+    }
+
+    function updateBrandDetails() {
+        const brandDescriptionElement = document.querySelector('.brand-description');
+        const brandPhotosElement = document.querySelector('.brand-photos');
+        const currentBrand = brandNames[currentBrandIndex];
+        if (brandDescriptionElement && brandData[currentBrand]) {
+            brandDescriptionElement.textContent = brandData[currentBrand].description;
+        }
+        if (brandPhotosElement && brandData[currentBrand]) {
+            brandPhotosElement.innerHTML = ''; // Clear existing photos
+            const images = brandData[currentBrand].images;
+            if (Array.isArray(images)) {
+                let totalWidth = 0;
+                images.forEach(imageUrl => {
+                    const img = document.createElement('img');
+                    img.src = imageUrl;
+                    img.style.height = '350px';
+                    img.style.width = 'auto';
+                    img.onload = () => {
+                        totalWidth += img.naturalWidth * (350 / img.naturalHeight); // Calculate scaled width
+                        brandPhotosElement.style.width = `${totalWidth}px`; // Set container width
+                        brandDescriptionElement.style.width = `${totalWidth}px`; // Set container width
+                    };
+                    img.addEventListener('click', () => {
+                        showImageInModal(img.src);
+                    });
+                    brandPhotosElement.appendChild(img);
+                });
+            }
+        }
+    }
+
+    function showImageInModal(src) {
+        const modal = document.createElement('div');
+        modal.classList.add('image-modal');
+        modal.innerHTML = `
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <img src="${src}" class="modal-image">
+            </div>
+        `;
+        document.body.appendChild(modal);
+    
+        const closeButton = modal.querySelector('.close-button');
+        closeButton.addEventListener('click', () => {
+            document.body.removeChild(modal);
+        });
+    
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                document.body.removeChild(modal);
+            }
+        });
+    }
+
     function addMenuEventListeners() {
         document.querySelectorAll('#index-button').forEach(button => {
             button.addEventListener('click', () => {
@@ -118,16 +202,55 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('#projects-button').forEach(button => {
             button.addEventListener('click', () => {
                 loadContent('projects.html', function() {
-                    showList('biasia');
-                    showList('coeval');
-                    showList('espiazione');
-                    showList('junk');
-                    showList('maxMara');
-                    showList('spaziox');
-                    showList('tm8');
-                    showList('vemecell');
-                    showList('webEyewear');
-                    showList('personal');
+                    
+                    const firebaseConfig = {
+                        apiKey: "AIzaSyDm18l5VH6gxrC-33uA7xNDIGfzPpgOr_s",
+                        authDomain: "storage-cecco.firebaseapp.com",
+                        databaseURL: "https://storage-cecco-default-rtdb.europe-west1.firebasedatabase.app",
+                        projectId: "storage-cecco",
+                        storageBucket: "storage-cecco.firebasestorage.app",
+                        messagingSenderId: "711299112703",
+                        appId: "1:711299112703:web:dcc4c8d6a7f0639fbbf6ca",
+                        measurementId: "G-4V1V6VQ6X2"
+                    };
+
+                    const app = initializeApp(firebaseConfig);
+                    const analytics = getAnalytics(app);
+                    const db = getDatabase(app);
+                    const dbRef = ref(db);
+
+                    onValue(dbRef, (snapshot) => {
+                        const data = snapshot.val();
+                        brandNames = Object.keys(data);
+                        brandData = data;
+                        currentBrandIndex = 0;
+                        updateBrandContent();
+                    });
+
+                    /*
+                    
+                    const brandPhotosElement = document.querySelector('.brand-photos');
+                    if (brandPhotosElement) {
+                        brandPhotosElement.addEventListener('wheel', (event) => {
+                            event.preventDefault();
+                            brandPhotosElement.scrollWidth += event.deltaX;
+                        });
+                    }
+                    
+                    /*
+                    document.querySelector('.f-sinistra').addEventListener('click', () => {
+                        if (currentBrandIndex > 0) {
+                            currentBrandIndex--;
+                            updateBrandDetails();
+                        }
+                    });
+                
+                    document.querySelector('.f-destra').addEventListener('click', () => {
+                        if (currentBrandIndex < brandNames.length - 1) {
+                            currentBrandIndex++;
+                            updateBrandDetails();
+                        }
+                    });*/
                 });
             });
         });
@@ -154,38 +277,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 });
-
-function showLargeImage(img) {
-    const largeImageContainer = document.createElement('div');
-    largeImageContainer.className = 'large-image';
-
-    const largeImage = document.createElement('img');
-    largeImage.src = img.src;
-
-    const closeButton = document.createElement('div');
-    closeButton.className = 'close';
-    closeButton.innerText = 'X';
-    closeButton.onclick = () => document.body.removeChild(largeImageContainer);
-
-    largeImageContainer.appendChild(largeImage);
-    largeImageContainer.appendChild(closeButton);
-    document.body.appendChild(largeImageContainer);
-}
-
-/*function showList(brand) {
-    document.getElementById(brand).addEventListener('click', function(event) {
-        event.preventDefault();
-        hideAllLists();
-        document.getElementById(brand + '-images').style.display = 'block';
-    });
-}*/
-
-function hideAllLists() {
-    const lists = document.querySelectorAll('.image-list');
-    lists.forEach(list => {
-        list.style.display = 'none';
-    });
-}
 
 document.addEventListener('DOMContentLoaded', function () {
     setTimeout(function () {

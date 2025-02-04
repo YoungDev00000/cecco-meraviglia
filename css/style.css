@@ -59,12 +59,13 @@
         position: absolute;
         display: flex;
         flex-direction: column;
-        align-items: center;
         justify-content: center;
         width: 100%;
         height: 90%;
-        z-index: 5; /* Livello più basso */
+        z-index: 5; 
         margin-top: 50px;
+        left: 50%; 
+        transform: translateX(-50%); /* Center horizontally */
     }
     
     .contatti {
@@ -375,7 +376,7 @@ html, body {
 
 #container {
     width: 100%;
-    font-size: 18px;
+    font-size: 12px;
     font-family: 'Whyte-Medium', sans-serif;
     position: absolute;
     overflow: hidden;
@@ -385,6 +386,7 @@ html, body {
     letter-spacing: 2px; /* Aumenta la spaziatura tra i caratteri */
     bottom: 0;
 }
+
 #container .scroll {
     display: flex;
     align-items: center;
@@ -393,13 +395,121 @@ html, body {
     white-space: nowrap;
     animation: loop 30s linear infinite;
 }
+
 .fade {
     width: 100%;
     position: absolute;
     inset: 0;
     pointer-event: none;
 }
+
 @keyframes loop {
     0% {transform: translateX(0%);}
     100% {transform: translateX(-50%);}
+}
+
+.container-brand {
+    position: absolute;
+    top: 200px;
+    left: 100px;
+    right: 100px;
+    max-width: calc(100% - 200px); /* Adjust width to account for left and right margins */
+    margin: 0 auto; /* Center the container */
+}
+
+.brand-description {
+    color: rgb(255, 0, 0);
+    font-size: 12px;
+    font-family: 'Whyte-Medium', sans-serif;
+    text-align: center;
+}
+
+.brand-photos {
+    display: flex;
+    flex-wrap: wrap; /* Ensure images wrap to the next line */
+    white-space: normal; /* Allow line breaks */
+    position: relative;
+    height: auto; /* Adjust height to fit content */
+}
+
+.brand-photos img {
+    display: inline-block;
+    padding: 0 !important;
+}
+
+.brand-title div {
+    color: rgb(255, 0, 0);
+    font-size: 16px;
+    font-family: 'Whyte-Medium', sans-serif;
+    transition: transform 0.3s ease; 
+    cursor: pointer;
+}
+
+.brand-title div:hover {
+    transform: translateX(20px); 
+}
+
+@media (max-width: 768px) {
+    /*.f-spazio, .f-destra, .f-sinistra {
+        display: none !important;
+    }*/
+
+    .scroll{
+        display: none !important;
+    }
+
+    .container-brand {
+        top: 100px;
+        left: 10px;
+        right: 10px;
+        max-width: calc(100% - 20px); /* Adjust width to account for left and right margins */
+        margin: 0 auto; /* Center the container */
+    }
+
+    .brand-description {
+        font-size: 10px;
+        text-align: right;
+    }
+
+    .brand-title div {
+        font-size: 12px;
+    }
+
+    .brand-title div:hover {
+        transform: translateX(-20px); 
+    }
+}
+
+/* Styles for the image modal and close button */
+.image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    align-items: center;
+    max-width: calc(100% - 80px);
+    max-height: calc(100% - 80px); 
+}
+
+.modal-image {
+    height: 600px;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
 }
