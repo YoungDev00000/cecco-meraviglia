@@ -7,29 +7,31 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <!--div id="brands-list"></div-->
     <div class="container-fluid container-brand px-4">
         <div class="row">
-            <div class="col-2">
-                <h1 class="brand-title"></h1>
+            <div class="col-5 col-md-2 brand-title"> 
             </div>
-            <div class="col-1" >
+            <div class="col-7 row d-md-none brand-description-sm">
+            </div>
+            <div class="col-1 d-none d-md-block">
             </div>
             <div class="col-9">
-                <div class="row brand-description" >
+                <div class="row brand-description d-none d-md-block" >
                 </div>
-                <div class="row" style="height: 60px;">
+                <div class="row d-none d-md-block" style="height: 60px;">
                 </div>
-                <div class="row brand-photos" >  
+                <div class="row brand-photos d-none d-md-block">  
                 </div>
-            <!--div class="row ">
-                <div class="col-1 f-sinistra text-center" style="background-color:gold">
-                    <h1><</h1>
-                </div>
-                <div class="col-1 f-destra text-center" style="background-color:green">
-                    <h1>></h1>
-                </div-->
             </div>
+        </div>
+        <div class="row d-md-none" style="height: 20px;">
+        </div>
+        <div class="row d-md-none container-photos-sm">
+            <div class="col-1 f-sinistra text-center"><</div>
+            <div class="col-10">
+                <img src="" class="brand-photos-sm" style="width: 100%;">
+            </div>
+            <div class="col-1 f-destra text-center">></div>
         </div>
     </div>
 </body>
