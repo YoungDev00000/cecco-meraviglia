@@ -40,7 +40,7 @@
     }
 
     .menu-bottom {
-        bottom: 70px;
+        bottom: 30px;
         width: 100%;
         position: absolute;
         font-family: 'Whyte-Medium', sans-serif;
@@ -297,8 +297,8 @@
         }
 
         .fotoProfilo-sm {
-            width: 60px;
-            height: auto;
+            width: auto;
+            height: 100%;
             display: block;
             margin: 0 auto;
             
@@ -306,6 +306,10 @@
 
         .flash-text {
             font-size: 16px;;
+        }
+
+        .container-photo-profilo {
+            height: 30px; /* Set the height of container-photo-profilo */
         }
     }
 
@@ -337,11 +341,9 @@
     }
 
     .francesco-datos-sm {
-        line-height: 1.25; /* Imposta l'altezza della linea per ridurre lo spazio verticale */
-        display: flex;
+        line-height: 1;
         flex-direction: column;
-        align-items: center;
-        height: 100%;
+        align-items: right;
         text-align: left; 
         color: rgb(255, 0, 0);
         font-size: 12px;
@@ -349,14 +351,9 @@
     }
 
     .graphic-designer-sm {
-        margin: 0;
-        padding: 0;
-        line-height: 1; /* Imposta l'altezza della linea per ridurre lo spazio verticale */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        line-height: 1.2;
         height: 100%;
-        text-align: left; 
+        text-align: right; 
         color: rgb(255, 0, 0);
         font-family: 'Whyte-Medium', sans-serif;
         font-size: 9px;
@@ -424,6 +421,13 @@ html, body {
     text-align: center;
 }
 
+.brand-description-sm {
+    color: rgb(255, 0, 0);
+    font-size: 10px;
+    font-family: 'Whyte-Medium', sans-serif;
+    text-align: right;
+}
+
 .brand-photos {
     display: flex;
     flex-wrap: wrap; /* Ensure images wrap to the next line */
@@ -449,10 +453,34 @@ html, body {
     transform: translateX(20px); 
 }
 
+container-photos-sm {
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; /* Center the container */
+}
+
+.f-destra {
+    color: rgb(255, 0, 0);
+    font-size: 18px;
+    font-family: 'Whyte-Medium', sans-serif;
+    text-align: left;
+    text-align: center;
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+} 
+
+.f-sinistra {
+    color: rgb(255, 0, 0);
+    font-size: 18px;
+    font-family: 'Whyte-Medium', sans-serif;
+    text-align: center;
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+} 
+
 @media (max-width: 768px) {
-    /*.f-spazio, .f-destra, .f-sinistra {
-        display: none !important;
-    }*/
 
     .scroll{
         display: none !important;
@@ -464,11 +492,6 @@ html, body {
         right: 10px;
         max-width: calc(100% - 20px); /* Adjust width to account for left and right margins */
         margin: 0 auto; /* Center the container */
-    }
-
-    .brand-description {
-        font-size: 10px;
-        text-align: right;
     }
 
     .brand-title div {

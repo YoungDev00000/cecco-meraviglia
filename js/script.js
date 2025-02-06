@@ -115,6 +115,13 @@ document.addEventListener('DOMContentLoaded', function () {
     let brandNames = [];
     let brandData = {};
     let currentBrandIndex = 0;
+    let currentImageIndex = 0;
+
+    const specialCharacters = ['&', '%', '$', ')', '/', '|', '\\', '?'];
+
+    function getRandomCharacter() {
+        return specialCharacters[Math.floor(Math.random() * specialCharacters.length)];
+    }
 
     function updateBrandContent() {
         const brandTitleElement = document.querySelector('.brand-title');
@@ -139,11 +146,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateBrandDetails() {
-        const brandDescriptionElement = document.querySelector('.brand-description');
+        const brandDescriptionElement = document.querySelector('.brand-description');  
+        const brandDescriptionSmElement = document.querySelector('.brand-description-sm');
         const brandPhotosElement = document.querySelector('.brand-photos');
+        const brandPhotosSmElement = document.querySelector('.brand-photos-sm');
         const currentBrand = brandNames[currentBrandIndex];
         if (brandDescriptionElement && brandData[currentBrand]) {
             brandDescriptionElement.textContent = brandData[currentBrand].description;
+        }
+        if (brandDescriptionSmElement && brandData[currentBrand]) {
+            brandDescriptionSmElement.textContent = brandData[currentBrand].description;
         }
         if (brandPhotosElement && brandData[currentBrand]) {
             brandPhotosElement.innerHTML = ''; // Clear existing photos
@@ -165,6 +177,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
                     brandPhotosElement.appendChild(img);
                 });
+            }
+        }
+        if (brandPhotosSmElement && brandData[currentBrand]) {
+            const images = brandData[currentBrand].images;
+            if (Array.isArray(images) && images.length > 0) {
+                brandPhotosSmElement.src = images[currentImageIndex];
             }
         }
     }
@@ -224,33 +242,26 @@ document.addEventListener('DOMContentLoaded', function () {
                         brandNames = Object.keys(data);
                         brandData = data;
                         currentBrandIndex = 0;
+                        currentImageIndex = 0; // Reset image index when loading projects
                         updateBrandContent();
                     });
 
-                    /*
-                    
-                    const brandPhotosElement = document.querySelector('.brand-photos');
-                    if (brandPhotosElement) {
-                        brandPhotosElement.addEventListener('wheel', (event) => {
-                            event.preventDefault();
-                            brandPhotosElement.scrollWidth += event.deltaX;
-                        });
-                    }
-                    
-                    /*
                     document.querySelector('.f-sinistra').addEventListener('click', () => {
-                        if (currentBrandIndex > 0) {
-                            currentBrandIndex--;
+                        if (currentImageIndex > 0) {
+                            currentImageIndex--;
                             updateBrandDetails();
                         }
+                        document.querySelector('.f-sinistra').innerText = getRandomCharacter();
                     });
                 
                     document.querySelector('.f-destra').addEventListener('click', () => {
-                        if (currentBrandIndex < brandNames.length - 1) {
-                            currentBrandIndex++;
+                        const images = brandData[brandNames[currentBrandIndex]].images;
+                        if (currentImageIndex < images.length - 1) {
+                            currentImageIndex++;
                             updateBrandDetails();
                         }
-                    });*/
+                        document.querySelector('.f-destra').innerText = getRandomCharacter();
+                    });
                 });
             });
         });
