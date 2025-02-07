@@ -459,6 +459,13 @@ container-photos-sm {
     margin: 0 auto; /* Center the container */
 }
 
+.brand-photos-sm {
+    height: 300px;
+    width: auto;
+    object-fit: contain; /* Ensure the image is not disproportionate */
+    cursor: pointer; /* Add cursor pointer to indicate clickability */
+}
+
 .f-destra {
     color: rgb(255, 0, 0);
     font-size: 18px;
@@ -525,7 +532,8 @@ container-photos-sm {
 }
 
 .modal-image {
-    height: 600px;
+    max-height: 90%;
+    max-width: 90%;
 }
 
 .close-button {

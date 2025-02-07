@@ -117,12 +117,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentBrandIndex = 0;
     let currentImageIndex = 0;
 
-    const specialCharacters = ['&', '%', '$', ')', '/', '|', '\\', '?'];
-
-    function getRandomCharacter() {
-        return specialCharacters[Math.floor(Math.random() * specialCharacters.length)];
-    }
-
     function updateBrandContent() {
         const brandTitleElement = document.querySelector('.brand-title');
         if (brandTitleElement && brandNames.length > 0) {
@@ -183,6 +177,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const images = brandData[currentBrand].images;
             if (Array.isArray(images) && images.length > 0) {
                 brandPhotosSmElement.src = images[currentImageIndex];
+                brandPhotosSmElement.addEventListener('click', () => {
+                    showImageInModal(brandPhotosSmElement.src);
+                });
             }
         }
     }
@@ -251,7 +248,6 @@ document.addEventListener('DOMContentLoaded', function () {
                             currentImageIndex--;
                             updateBrandDetails();
                         }
-                        document.querySelector('.f-sinistra').innerText = getRandomCharacter();
                     });
                 
                     document.querySelector('.f-destra').addEventListener('click', () => {
@@ -260,7 +256,6 @@ document.addEventListener('DOMContentLoaded', function () {
                             currentImageIndex++;
                             updateBrandDetails();
                         }
-                        document.querySelector('.f-destra').innerText = getRandomCharacter();
                     });
                 });
             });
