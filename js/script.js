@@ -1,9 +1,68 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+import loadComponents from "./components.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadComponents().then(() => {
+      start();
+    });
+  });
+
+function start() {
+    try{
+        var homeContainer = document.getElementById("home");
+        var contactsContainer = document.getElementById("contacts");
+        var projectsContainer = document.getElementById("projects");
+        var projectsFilter = document.getElementById("filtro-progetti");
+        
+        homeContainer.style.display = "flex";
+        homeContainer.style.position = "absolute";
+        contactsContainer.style.display = "none";
+        projectsContainer.style.display = "none";
+        projectsFilter.style.display = "none";
+
+        document.querySelectorAll('#index-button').forEach(button => {
+            button.addEventListener('click', () => {
+                homeContainer.style.display = "flex";
+                contactsContainer.style.display = "none";
+                projectsContainer.style.display = "none";
+                projectsFilter.style.display = "none";
+            });
+        });
+
+        document.querySelectorAll('#projects-button').forEach(button => {
+            button.addEventListener('click', () => {
+                homeContainer.style.display = "none";
+                contactsContainer.style.display = "none";
+                projectsContainer.style.display = "flex";
+                projectsFilter.style.display = "flex";
+                showBrandTitles();
+            });
+        });
+
+        document.querySelectorAll('#contact-button').forEach(button => {
+            button.addEventListener('click', () => {
+                contactsContainer.style.display = "flex";
+                homeContainer.style.display = "none";
+                projectsContainer.style.display = "none";
+                projectsFilter.style.display = "flex";
+            });
+        });
+
+    }   catch (error) {
+        console.error("Error loading components:", error);
+    }
+}
+
+function showBrandTitles() {
+    const brandTitleElements = document.querySelectorAll('.brand-title div');
+    brandTitleElements.forEach(element => {
+        element.style.opacity = 1;
+    });
+}
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Crea la scena
     const scene = new THREE.Scene();
 
     // Crea la camera
@@ -125,167 +184,38 @@ document.addEventListener('DOMContentLoaded', function () {
                 const brandNameElement = document.createElement('div');
                 brandNameElement.textContent = brand;
                 brandNameElement.style.cursor = 'pointer';
+                brandNameElement.style.opacity = 0; // Start with opacity 0
                 brandNameElement.addEventListener('click', () => {
                     currentBrandIndex = index;
                     updateBrandDetails();
-                    document.querySelectorAll('.brand-title div').forEach(el => {
-                        el.style.transform = 'translateX(0)'; // Reset transform for all elements
-                    });
-                    brandNameElement.style.transform = 'translateX(20px)'; // Move clicked element
                 });
                 brandTitleElement.appendChild(brandNameElement);
             });
-            updateBrandDetails();
         }
     }
-
-    function updateBrandDetails() {
-        const brandDescriptionElement = document.querySelector('.brand-description');  
-        const brandDescriptionSmElement = document.querySelector('.brand-description-sm');
-        const brandPhotosElement = document.querySelector('.brand-photos');
-        const brandPhotosSmElement = document.querySelector('.brand-photos-sm');
-        const currentBrand = brandNames[currentBrandIndex];
-        if (brandDescriptionElement && brandData[currentBrand]) {
-            brandDescriptionElement.textContent = brandData[currentBrand].description;
-        }
-        if (brandDescriptionSmElement && brandData[currentBrand]) {
-            brandDescriptionSmElement.textContent = brandData[currentBrand].description;
-        }
-        if (brandPhotosElement && brandData[currentBrand]) {
-            brandPhotosElement.innerHTML = ''; // Clear existing photos
-            const images = brandData[currentBrand].images;
-            if (Array.isArray(images)) {
-                let totalWidth = 0;
-                images.forEach(imageUrl => {
-                    const img = document.createElement('img');
-                    img.src = imageUrl;
-                    img.style.height = '350px';
-                    img.style.width = 'auto';
-                    img.onload = () => {
-                        totalWidth += img.naturalWidth * (350 / img.naturalHeight); // Calculate scaled width
-                        brandPhotosElement.style.width = `${totalWidth}px`; // Set container width
-                        brandDescriptionElement.style.width = `${totalWidth}px`; // Set container width
-                    };
-                    img.addEventListener('click', () => {
-                        showImageInModal(img.src);
-                    });
-                    brandPhotosElement.appendChild(img);
-                });
-            }
-        }
-        if (brandPhotosSmElement && brandData[currentBrand]) {
-            const images = brandData[currentBrand].images;
-            if (Array.isArray(images) && images.length > 0) {
-                brandPhotosSmElement.src = images[currentImageIndex];
-                brandPhotosSmElement.addEventListener('click', () => {
-                    showImageInModal(brandPhotosSmElement.src);
-                });
-            }
-        }
-    }
-
-    function showImageInModal(src) {
-        const modal = document.createElement('div');
-        modal.classList.add('image-modal');
-        modal.innerHTML = `
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <img src="${src}" class="modal-image">
-            </div>
-        `;
-        document.body.appendChild(modal);
-    
-        const closeButton = modal.querySelector('.close-button');
-        closeButton.addEventListener('click', () => {
-            document.body.removeChild(modal);
-        });
-    
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                document.body.removeChild(modal);
-            }
-        });
-    }
-
-    function addMenuEventListeners() {
-        document.querySelectorAll('#index-button').forEach(button => {
-            button.addEventListener('click', () => {
-                loadContent('home.html');
-            });
-        });
-
-        document.querySelectorAll('#projects-button').forEach(button => {
-            button.addEventListener('click', () => {
-                loadContent('projects.html', function() {
                     
-                    const firebaseConfig = {
-                        apiKey: "AIzaSyDm18l5VH6gxrC-33uA7xNDIGfzPpgOr_s",
-                        authDomain: "storage-cecco.firebaseapp.com",
-                        databaseURL: "https://storage-cecco-default-rtdb.europe-west1.firebasedatabase.app",
-                        projectId: "storage-cecco",
-                        storageBucket: "storage-cecco.firebasestorage.app",
-                        messagingSenderId: "711299112703",
-                        appId: "1:711299112703:web:dcc4c8d6a7f0639fbbf6ca",
-                        measurementId: "G-4V1V6VQ6X2"
-                    };
+    const firebaseConfig = {
+        apiKey: "AIzaSyDm18l5VH6gxrC-33uA7xNDIGfzPpgOr_s",
+        authDomain: "storage-cecco.firebaseapp.com",
+        databaseURL: "https://storage-cecco-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "storage-cecco",
+        storageBucket: "storage-cecco.firebasestorage.app",
+        messagingSenderId: "711299112703",
+        appId: "1:711299112703:web:dcc4c8d6a7f0639fbbf6ca",
+        measurementId: "G-4V1V6VQ6X2"
+    };
 
-                    const app = initializeApp(firebaseConfig);
-                    const analytics = getAnalytics(app);
-                    const db = getDatabase(app);
-                    const dbRef = ref(db);
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const dbRef = ref(db);
 
-                    onValue(dbRef, (snapshot) => {
-                        const data = snapshot.val();
-                        brandNames = Object.keys(data);
-                        brandData = data;
-                        currentBrandIndex = 0;
-                        currentImageIndex = 0; // Reset image index when loading projects
-                        updateBrandContent();
-                    });
+    onValue(dbRef, (snapshot) => {
+        const data = snapshot.val();
+        brandNames = Object.keys(data);
+        brandData = data;
+        currentBrandIndex = 0;
+        currentImageIndex = 0; // Reset image index when loading projects
+        updateBrandContent();
+    });
 
-                    document.querySelector('.f-sinistra').addEventListener('click', () => {
-                        if (currentImageIndex > 0) {
-                            currentImageIndex--;
-                            updateBrandDetails();
-                        }
-                    });
-                
-                    document.querySelector('.f-destra').addEventListener('click', () => {
-                        const images = brandData[brandNames[currentBrandIndex]].images;
-                        if (currentImageIndex < images.length - 1) {
-                            currentImageIndex++;
-                            updateBrandDetails();
-                        }
-                    });
-                });
-            });
-        });
-
-        document.querySelectorAll('#contact-button').forEach(button => {
-            button.addEventListener('click', () => {
-                loadContent('contact.html');
-            });
-        });
-    }
-
-    addMenuEventListeners();
-
-    function loadContent(url, callback = () => {}) {
-        fetch(url)
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('content').innerHTML = html;
-                callback();
-                addMenuEventListeners(); // Riassegna gli eventi click dopo il caricamento del contenuto
-            })
-            .catch(error => {
-                console.error('Error loading content:', error);
-            });
-    }
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    setTimeout(function () {
-        document.getElementById('flash-text').style.display = 'none';
-    }, 7000);
 });

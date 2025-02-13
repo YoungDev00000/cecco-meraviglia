@@ -12,8 +12,9 @@
     <script src="js/script.js" type="module" defer></script>
 </head>
 <body>
-    <div id="flash-text" class="flash-text">click to move  <('o'<)</div>
+    <!--div id="flash-text" class="flash-text">click to move  <('o'<)</div-->
     <div id="background"></div>
+    <div id="filtro-progetti"></div>
     <div class="overlay-container">
         <div class="container">
             <div class="row row-cols-1 row-cols-md-6" style="margin-top: 20px;">
@@ -26,8 +27,7 @@
                 <div class="col d-none d-md-block menu-top" id="projects-button">PROJECTS</div>
                 <div class="col d-none d-md-block menu-top" id="contact-button">CONTACTS</div>
             </div>
-            <div class="row row-cols-4 d-md-none" style="margin-top: 20px; justify-content: center;
-        align-items: center;">
+            <div class="row row-cols-4 d-md-none" style="margin-top: 20px; justify-content: center; align-items: center;">
                 <div class="col container-photo-profilo">
                     <img src="img/fotoProfilo.jpg" class="fotoProfilo-sm">
                 </div>
@@ -40,15 +40,24 @@
                     GRAPHIC/<br>VISUAL<br>DESIGNER
                 </div>
             </div>
-            <div class="row row-cols-3 d-md-none menu-bottom">
-                <div class="col" id="index-button">HOME</div>
-                <div class="col" id="projects-button">PROJECTS</div>
-                <div class="col" id="contact-button">CONTACTS</div>
+
+            <home-container id="home"></home-container>
+            <contacts-container id="contacts"></contacts-container>
+
+            <div class="row row-cols-6 d-md-none menu-bottom" >
+                <div class="col-4"></div>
+                <div class="col-4">
+                    <projects-container class="row container-brand" id="projects"></projects-container>        
+                </div>
+                <div class="col-4"></div>
+                <div class="col-4" id="index-button">HOME</div>
+                <div class="col-4" id="projects-button">PROJECTS</div>
+                <div class="col-4" id="contact-button">CONTACTS</div>
             </div>
         </div>
     </div>
-    <div id="content"></div>
-    <div id='container'>
+
+    <!--div id='container'>
         <div class='scroll'>
             <div>Mi chiamo Francesco Da Tos, ho 24 anni e attualmente risiedo 
                 a Treviso. 
@@ -70,6 +79,6 @@
                 importanti etichette discografiche come Universal e Warner, 
                 oltre a numerosi progetti indipendenti.                      :) </div>
         </div>
-    </div>
+    </div-->
 </body>
 </html>
