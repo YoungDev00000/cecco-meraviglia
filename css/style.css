@@ -145,7 +145,7 @@ header a {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: calc(100vh - 120px); /* Altezza totale meno l'altezza del menu-bottom */
+        height: calc(100vh - 180px); /* Altezza totale meno l'altezza del menu-bottom */
         margin-bottom: 40px;
     }
 }

@@ -9,16 +9,16 @@
     z-index: 5; 
 }
 
-.contatti a {
+.contatti {
     text-decoration: none;
     font-size: 12px;
     color: rgb(255, 0, 0);
     font-family: 'Whyte-Medium', sans-serif;
-    text-align: center;
     margin: 0;
+    text-align: center;
 }
 
-.contatti:hover {
+.contatti :hover {
     opacity: 0.5;
 }
 
