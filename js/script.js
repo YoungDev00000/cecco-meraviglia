@@ -15,29 +15,38 @@ function start() {
         var contactsContainer = document.getElementById("contacts");
         var projectsContainer = document.getElementById("projects");
         var projectsFilter = document.getElementById("filtro-progetti");
+        var projectsButton = document.getElementById("projects-button");
         
         homeContainer.style.display = "flex";
         homeContainer.style.position = "absolute";
         contactsContainer.style.display = "none";
         projectsContainer.style.display = "none";
-        projectsFilter.style.display = "none";
+        projectsFilter.style.opacity = "0";
+        projectsButton.textContent = "PROJECTS"; // Imposta il testo iniziale
 
         document.querySelectorAll('#index-button').forEach(button => {
             button.addEventListener('click', () => {
                 homeContainer.style.display = "flex";
                 contactsContainer.style.display = "none";
                 projectsContainer.style.display = "none";
-                projectsFilter.style.display = "none";
+                projectsFilter.style.opacity = "0";
+                resetBrandContainer();
             });
         });
 
         document.querySelectorAll('#projects-button').forEach(button => {
             button.addEventListener('click', () => {
-                homeContainer.style.display = "none";
-                contactsContainer.style.display = "none";
-                projectsContainer.style.display = "flex";
-                projectsFilter.style.display = "flex";
-                showBrandTitles();
+                if (projectsButton.textContent === "BACK") {
+                    resetBrandContainer();
+                    projectsButton.textContent = "PROJECTS";
+                } else {
+                    homeContainer.style.display = "none";
+                    contactsContainer.style.display = "none";
+                    projectsContainer.style.display = "flex";
+                    projectsFilter.style.opacity = "0.9";
+                    showBrandTitles();
+                    resetBrandContainer();
+                }
             });
         });
 
@@ -46,7 +55,8 @@ function start() {
                 contactsContainer.style.display = "flex";
                 homeContainer.style.display = "none";
                 projectsContainer.style.display = "none";
-                projectsFilter.style.display = "flex";
+                projectsFilter.style.opacity = "0.9";
+                resetBrandContainer();
             });
         });
 
@@ -60,6 +70,43 @@ function showBrandTitles() {
     brandTitleElements.forEach(element => {
         element.style.opacity = 1;
     });
+}
+
+function updateBrandDetails(brand) {
+    const brandImageElement = document.querySelector('.brand-images');
+    const brandDescriptionElement = document.querySelector('.brand-description');
+    const brandTitleElement = document.querySelector('.brand-title');
+    const brandNameElement = document.querySelector('.brand-name');
+    const projectsButton = document.getElementById("projects-button");
+
+    console.log(brand);
+
+    if (brandImageElement && brandDescriptionElement && brandTitleElement) {
+        brandImageElement.src = brand.images;
+        brandDescriptionElement.textContent = brand.description;
+
+        brandNameElement.style.display = 'block';
+        brandTitleElement.style.display = 'none';
+        brandImageElement.style.display = 'block';
+        brandDescriptionElement.style.display = 'block';
+        projectsButton.textContent = "BACK";
+    }
+}
+
+function resetBrandContainer() {
+    const brandImageElement = document.querySelector('.brand-images');
+    const brandDescriptionElement = document.querySelector('.brand-description');
+    const brandNameElement = document.querySelector('.brand-name');
+    const brandTitleElement = document.querySelector('.brand-title');
+    const projectsButton = document.getElementById("projects-button");
+
+    if (brandImageElement && brandDescriptionElement && brandNameElement && brandTitleElement) {
+        brandTitleElement.style.display = 'block';
+        brandImageElement.style.display = 'none';
+        brandDescriptionElement.style.display = 'none';
+        brandNameElement.style.display = 'none';
+        projectsButton.textContent = "PROJECTS";
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -187,7 +234,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 brandNameElement.style.opacity = 0; // Start with opacity 0
                 brandNameElement.addEventListener('click', () => {
                     currentBrandIndex = index;
-                    updateBrandDetails();
+                    updateBrandDetails(brandData[brand]);
+                    document.querySelector('.brand-name').textContent = brand;
                 });
                 brandTitleElement.appendChild(brandNameElement);
             });

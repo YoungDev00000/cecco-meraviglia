@@ -58,7 +58,7 @@ body {
 }
 
 .menu-bottom .col:hover {
-    text-decoration: underline;
+    opacity: 0.5;
 }
 
 header a {
@@ -103,17 +103,6 @@ header a {
     padding: 20px;
 }
 
-.flash-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3em;
-    color: red;
-    animation: flash 2s infinite;
-    pointer-events: none;
-}
-
 @keyframes flash {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
@@ -129,7 +118,6 @@ header a {
 }
 
 .container-brand { 
-    text-align: left;
 }
 
 @media (max-width: 768px) {
@@ -150,9 +138,15 @@ header a {
     .container-photo-profilo {
         height: 30px;
     }
-    .container-brand { 
+
+    .container-brand {
         text-align: center;
-        margin-bottom: 80px;
+        /*display: flex;*/
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 120px); /* Altezza totale meno l'altezza del menu-bottom */
+        margin-bottom: 40px;
     }
 }
 
@@ -242,5 +236,7 @@ html, body {
     background-color: #DFDFDF;
     z-index: 0.5;
     opacity: 0.9;
+    transition: opacity 1s ease-in-out; /* Aggiungi questa linea per l'animazione */
+    pointer-events: none; /* Impedisce l'interazione */
 }
 

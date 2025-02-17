@@ -141,14 +141,37 @@
     cursor: pointer;
 }
 
+.image-container{
+    padding: 0; /* Rimuovi padding */
+    margin: 0; /* Rimuovi margini */
+}
+
+.brand-images {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 100vh;
+    object-fit: contain;
+}
+
+.brand-name {
+    color: rgb(255, 0, 0);
+    font-size: 12px;
+    font-family: 'Whyte-Medium', sans-serif;
+    margin-top: 20px;
+}
+
+.brand-description {
+    color: rgb(255, 0, 0);
+    font-size: 8px;
+    font-family: 'Whyte-Medium', sans-serif;
+}
+
 @media (max-width: 768px) {
-    .scroll {
-        display: none !important;
-    }
 
     .brand-title div {
         font-size: 14px;
-        margin-bottom: 10px;
+        margin-top: 10px;
     }
 
     .brand-title div:hover {
