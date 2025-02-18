@@ -46,9 +46,10 @@ body {
 }
 
 .menu-bottom {
-    bottom: 30px;
+    position: fixed;
+    bottom: -100px; /* Hide off-screen */
     width: 100%;
-    position: absolute;
+    transition: bottom 0.5s ease; /* Add transition */
     font-family: 'Whyte-Medium', sans-serif;
     font-size: 14px;
     line-height: 1.5;
@@ -240,3 +241,20 @@ html, body {
     pointer-events: none; /* Impedisce l'interazione */
 }
 
+/* New header-cecco styles */
+.header-cecco {
+    position: fixed;
+    top: -100px; /* Nascondi fuori dallo schermo */
+    left: 0;
+    width: 100%;
+    transition: top 0.5s ease; /* Aggiungi transizione */
+    z-index: 10;
+}
+
+.header-cecco-sm {
+    position: fixed;
+    top: -100px;
+    width: 100%;
+    justify-content: center; 
+    align-items: center;
+}

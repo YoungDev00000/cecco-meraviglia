@@ -16,6 +16,7 @@ function start() {
         var projectsContainer = document.getElementById("projects");
         var projectsFilter = document.getElementById("filtro-progetti");
         var projectsButton = document.getElementById("projects-button");
+        var headerCecco = document.querySelector(".header-cecco");
         
         homeContainer.style.display = "flex";
         homeContainer.style.position = "absolute";
@@ -266,4 +267,21 @@ document.addEventListener('DOMContentLoaded', function () {
         updateBrandContent();
     });
 
+});
+
+document.addEventListener("click", function handleFirstClick() {
+    const headerCecco = document.querySelector(".header-cecco");
+    const headerCeccoSm = document.querySelector(".header-cecco-sm");
+    const menuBottom = document.querySelector(".menu-bottom");
+    
+    headerCecco.style.transition = "top 1s ease"; // Add transition effect
+    headerCecco.style.top = "0"; // Show the header with a downward transition
+    
+    headerCeccoSm.style.transition = "top 1s ease"; // Add transition effect for small header
+    headerCeccoSm.style.top = "0"; // Show the small header with a downward transition
+    
+    menuBottom.style.transition = "bottom 1s ease"; // Add transition effect for menu-bottom
+    menuBottom.style.bottom = "30px"; // Show the menu-bottom with an upward transition
+    
+    document.removeEventListener("click", handleFirstClick); // Remove the event listener after the first click
 });
