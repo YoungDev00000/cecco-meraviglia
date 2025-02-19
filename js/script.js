@@ -61,6 +61,10 @@ function start() {
             });
         });
 
+        document.getElementById("background").addEventListener("click", () => {
+            headerCecco.style.top = "0"; // Mostra l'header con una transizione verso il basso
+        });
+
     }   catch (error) {
         console.error("Error loading components:", error);
     }

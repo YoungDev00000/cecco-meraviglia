@@ -119,6 +119,10 @@ header a {
 }
 
 .container-brand { 
+    position: absolute;
+    width: 100%;
+    left: 0;
+    z-index: 11;
 }
 
 @media (max-width: 768px) {
@@ -142,12 +146,19 @@ header a {
 
     .container-brand {
         text-align: center;
-        /*display: flex;*/
+        width: auto;
+        position: static;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         height: calc(100vh - 180px); /* Altezza totale meno l'altezza del menu-bottom */
         margin-bottom: 40px;
+    }
+}
+
+@media (min-width: 768px) {
+    .brand-title {
+        display: block !important; /* Ensure brand list is always visible on larger screens */
     }
 }
 

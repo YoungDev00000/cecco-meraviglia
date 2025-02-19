@@ -121,7 +121,7 @@
 
 .brand-title div {
     color: rgb(255, 0, 0);
-    font-size: 16px;
+    font-size: 12px;
     font-family: 'Whyte-Medium', sans-serif;
     transition: transform 0.3s ease;
     cursor: pointer;
@@ -212,4 +212,12 @@
     font-size: 30px;
     color: #fff;
     cursor: pointer;
+}
+
+.image-container-top {
+    height: 100vh; /* Set height to full screen */
+    object-fit: cover; /* Ensure the image covers the container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
