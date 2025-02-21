@@ -51,6 +51,17 @@ function start() {
             });
         });
 
+        document.querySelectorAll('#projects-button-top').forEach(button => {
+            button.addEventListener('click', () => {
+                homeContainer.style.display = "none";
+                contactsContainer.style.display = "none";
+                projectsContainer.style.display = "flex";
+                projectsFilter.style.opacity = "0.9";
+                showBrandTitles();
+                resetBrandContainer();
+            });
+        });
+
         document.querySelectorAll('#contact-button').forEach(button => {
             button.addEventListener('click', () => {
                 contactsContainer.style.display = "flex";
@@ -77,38 +88,48 @@ function showBrandTitles() {
     });
 }
 
+//SPECIALIZZAZIONE PER PC, ATTENTO AL TELEFONO
+
 function updateBrandDetails(brand) {
-    const brandImageElement = document.querySelector('.brand-images');
+    const brandImageElements = document.querySelectorAll('.brand-images'); // Select all elements with class 'brand-images'
     const brandDescriptionElement = document.querySelector('.brand-description');
+    const pcBrandDescriptionElement = document.querySelector('.pc-brand-description');
     const brandTitleElement = document.querySelector('.brand-title');
     const brandNameElement = document.querySelector('.brand-name');
     const projectsButton = document.getElementById("projects-button");
 
     console.log(brand);
 
-    if (brandImageElement && brandDescriptionElement && brandTitleElement) {
-        brandImageElement.src = brand.images;
+    if (brandImageElements.length && brandDescriptionElement && brandTitleElement && pcBrandDescriptionElement) {
+        brandImageElements.forEach(element => {
+            element.src = brand.images; // Update each brand image element
+        });
         brandDescriptionElement.textContent = brand.description;
+        pcBrandDescriptionElement.textContent = brand.description;
 
         brandNameElement.style.display = 'block';
         brandTitleElement.style.display = 'none';
-        brandImageElement.style.display = 'block';
+        brandImageElements.forEach(element => element.style.display = 'block');
         brandDescriptionElement.style.display = 'block';
+        pcBrandDescriptionElement.style.display = 'block';
         projectsButton.textContent = "BACK";
     }
 }
 
 function resetBrandContainer() {
-    const brandImageElement = document.querySelector('.brand-images');
+    const brandImageElements = document.querySelectorAll('.brand-images'); // Select all elements with class 'brand-images'
     const brandDescriptionElement = document.querySelector('.brand-description');
+    const pcBrandDescriptionElement = document.querySelector('.pc-brand-description');
     const brandNameElement = document.querySelector('.brand-name');
     const brandTitleElement = document.querySelector('.brand-title');
     const projectsButton = document.getElementById("projects-button");
 
-    if (brandImageElement && brandDescriptionElement && brandNameElement && brandTitleElement) {
+    if (brandImageElements.length && brandDescriptionElement && brandNameElement 
+        && brandTitleElement && pcBrandDescriptionElement) {
         brandTitleElement.style.display = 'block';
-        brandImageElement.style.display = 'none';
+        brandImageElements.forEach(element => element.style.display = 'none');
         brandDescriptionElement.style.display = 'none';
+        pcBrandDescriptionElement.style.display = 'none';
         brandNameElement.style.display = 'none';
         projectsButton.textContent = "PROJECTS";
     }
@@ -230,6 +251,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateBrandContent() {
         const brandTitleElement = document.querySelector('.brand-title');
+        const pcBrandDescriptionElement = document.querySelector('.pc-brand-description');
+        const brandImageElements = document.querySelectorAll('.brand-images'); // Select all elements with class 'brand-images'
         if (brandTitleElement && brandNames.length > 0) {
             brandTitleElement.innerHTML = ''; // Clear existing content
             brandNames.forEach((brand, index) => {
@@ -244,6 +267,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
                 brandTitleElement.appendChild(brandNameElement);
             });
+
+            // Populate pc-brand-description and brand-images with the first brand's details
+            if (pcBrandDescriptionElement) {
+                pcBrandDescriptionElement.textContent = brandData[brandNames[0]].description;
+            }
+            if (brandImageElements.length) {
+                brandImageElements.forEach(element => {
+                    element.src = brandData[brandNames[0]].images;
+                });
+            }
         }
     }
                     
@@ -273,7 +306,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-document.addEventListener("click", function handleFirstClick() {
+document.addEventListener("click", handleFirstInteraction);
+document.addEventListener("touchstart", handleFirstInteraction);
+
+function handleFirstInteraction() {
     const headerCecco = document.querySelector(".header-cecco");
     const headerCeccoSm = document.querySelector(".header-cecco-sm");
     const menuBottom = document.querySelector(".menu-bottom");
@@ -287,5 +323,6 @@ document.addEventListener("click", function handleFirstClick() {
     menuBottom.style.transition = "bottom 1s ease"; // Add transition effect for menu-bottom
     menuBottom.style.bottom = "30px"; // Show the menu-bottom with an upward transition
     
-    document.removeEventListener("click", handleFirstClick); // Remove the event listener after the first click
-});
+    document.removeEventListener("click", handleFirstInteraction); // Remove the event listener after the first interaction
+    document.removeEventListener("touchstart", handleFirstInteraction); // Remove the event listener after the first interaction
+}

@@ -146,14 +146,6 @@
     margin: 0; /* Rimuovi margini */
 }
 
-.brand-images {
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-    max-height: 100vh;
-    object-fit: contain;
-}
-
 .brand-name {
     color: rgb(255, 0, 0);
     font-size: 12px;
@@ -167,17 +159,6 @@
     font-family: 'Whyte-Medium', sans-serif;
 }
 
-@media (max-width: 768px) {
-
-    .brand-title div {
-        font-size: 14px;
-        margin-top: 10px;
-    }
-
-    .brand-title div:hover {
-        opacity: 0.5;
-    }
-}
 
 /* Styles for the image modal and close button */
 .image-modal {
@@ -220,4 +201,36 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-right: 85px;
+    z-index: 11;
+}
+
+/* PER SMARTPHONE */
+@media (max-width: 768px) {
+
+    .brand-title div {
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    .brand-title div:hover {
+        opacity: 0.5;
+    }
+
+    .brand-images {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        max-height: 100vh;
+        object-fit: contain;
+    }
+
+}
+
+/* PER PC */
+@media (min-width: 768px) {
+
+    .brand-images {
+        width: auto;
+    }
 }

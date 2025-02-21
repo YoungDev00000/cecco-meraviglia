@@ -122,7 +122,6 @@ header a {
     position: absolute;
     width: 100%;
     left: 0;
-    z-index: 11;
 }
 
 @media (max-width: 768px) {

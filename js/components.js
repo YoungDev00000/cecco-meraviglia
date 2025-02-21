@@ -3,6 +3,7 @@ export default function loadComponents() {
       loadView("./components/contacts.html", "contacts-container", ContactsContainer),
       loadView("./components/home.html", "home-container", HomeContainer),
       loadView("./components/projects.html", "projects-container", ProjectsContainer),
+      loadView("./components/brands.html", "brands-container", BrandsContainer),
     ]);
   }
   
@@ -40,5 +41,12 @@ export default function loadComponents() {
     constructor() {
       super();
       this.innerHTML = ProjectsContainer._html;
+    }
+  }
+
+  class BrandsContainer extends HTMLElement {
+    constructor() {
+      super();
+      this.innerHTML = BrandsContainer._html;
     }
   }

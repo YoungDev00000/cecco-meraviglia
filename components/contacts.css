@@ -29,3 +29,15 @@
     font-family: 'Whyte-Medium', sans-serif;
     margin-top: 40px;
 }
+
+/* PER PC */
+@media (min-width: 768px) {
+
+    .bio-description {
+        margin-top: 0px;
+    }
+
+    .pc-links{
+        margin-top: 300px;
+    }
+}
