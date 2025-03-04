@@ -1,3 +1,5 @@
+@import url('variables.css');
+
 /* Importa il font Whyte-Medium */
 @font-face {
     font-family: 'Whyte-Medium';
@@ -20,7 +22,7 @@ body {
     left: 10px;
     line-height: 1.5;
     text-align: left;
-    color: rgb(255, 0, 0);
+    color: var(--color);
 }
 
 .header-francesco {
@@ -28,7 +30,7 @@ body {
     font-size: 14px;
     line-height: 1.5;
     text-align: center;
-    color: rgb(255, 0, 0);
+    color: var(--color);
 }
 
 .menu-top {
@@ -36,7 +38,7 @@ body {
     font-size: 14px;
     line-height: 1.5;
     text-align: center;
-    color: rgb(255, 0, 0);
+    color: var(--color);
     z-index: 10;
     cursor: pointer;
 }
@@ -54,7 +56,7 @@ body {
     font-size: 14px;
     line-height: 1.5;
     text-align: center;
-    color: rgb(255, 0, 0);
+    color: var(--color);
     z-index: 10;
 }
 
@@ -115,13 +117,15 @@ header a {
     font-size: 14px;
     top: 10px;
     line-height: 1.5;
-    color: rgb(255, 0, 0);
+    color: var(--color);
 }
 
 .container-brand { 
     position: absolute;
+    display: flex;
     width: 100%;
     left: 0;
+    visibility: hidden;
 }
 
 @media (max-width: 768px) {
@@ -152,12 +156,6 @@ header a {
         align-items: center;
         height: calc(100vh - 180px); /* Altezza totale meno l'altezza del menu-bottom */
         margin-bottom: 40px;
-    }
-}
-
-@media (min-width: 768px) {
-    .brand-title {
-        display: block !important; /* Ensure brand list is always visible on larger screens */
     }
 }
 
@@ -192,7 +190,7 @@ header a {
     flex-direction: column;
     align-items: right;
     text-align: left;
-    color: rgb(255, 0, 0);
+    color: var(--color);
     font-size: 12px;
     font-family: 'Whyte-Medium', sans-serif;
 }
@@ -201,7 +199,7 @@ header a {
     line-height: 1.2;
     height: 100%;
     text-align: right;
-    color: rgb(255, 0, 0);
+    color: var(--color);
     font-family: 'Whyte-Medium', sans-serif;
     font-size: 9px;
 }
@@ -217,7 +215,7 @@ html, body {
     position: absolute;
     overflow: hidden;
     white-space: nowrap;
-    color: rgb(255, 0, 0);
+    color: var(--color);
     margin-bottom: 20px;
     letter-spacing: 2px;
     bottom: 0;

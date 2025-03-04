@@ -5,69 +5,88 @@ import loadComponents from "./components.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     loadComponents().then(() => {
-      start();
+        start();
     });
-  });
+});
 
 function start() {
-    try{
+    try {
         var homeContainer = document.getElementById("home");
         var contactsContainer = document.getElementById("contacts");
         var projectsContainer = document.getElementById("projects");
         var projectsFilter = document.getElementById("filtro-progetti");
         var projectsButton = document.getElementById("projects-button");
         var headerCecco = document.querySelector(".header-cecco");
-        
+
         homeContainer.style.display = "flex";
         homeContainer.style.position = "absolute";
         contactsContainer.style.display = "none";
-        projectsContainer.style.display = "none";
+        projectsContainer.style.visibility = "hidden";
+
+        const imageContainer = document.querySelector(".image-container-pc");
+        imageContainer.classList.remove("show");
+        imageContainer.classList.add("hide");
+
         projectsFilter.style.opacity = "0";
-        projectsButton.textContent = "PROJECTS"; // Imposta il testo iniziale
+        projectsButton.textContent = "PROJECTS";
 
         document.querySelectorAll('#index-button').forEach(button => {
             button.addEventListener('click', () => {
                 homeContainer.style.display = "flex";
                 contactsContainer.style.display = "none";
-                projectsContainer.style.display = "none";
+                projectsContainer.style.visibility = "hidden";
                 projectsFilter.style.opacity = "0";
                 resetBrandContainer();
+
+                const imageContainer = document.querySelector(".image-container-pc");
+                imageContainer.classList.remove("show");
+                imageContainer.classList.add("hide");
             });
         });
-
-        document.querySelectorAll('#projects-button').forEach(button => {
-            button.addEventListener('click', () => {
-                if (projectsButton.textContent === "BACK") {
+        
+        //gestione lista brand
+        projectsButton.addEventListener('click', () => {
+            if (projectsButton.textContent === "BACK") {
                     resetBrandContainer();
                     projectsButton.textContent = "PROJECTS";
                 } else {
                     homeContainer.style.display = "none";
                     contactsContainer.style.display = "none";
-                    projectsContainer.style.display = "flex";
+                    projectsContainer.style.visibility = "visible";
+
                     projectsFilter.style.opacity = "0.9";
+
                     showBrandTitles();
-                    resetBrandContainer();
+                    //resetBrandContainer();
                 }
-            });
         });
 
-        document.querySelectorAll('#projects-button-top').forEach(button => {
-            button.addEventListener('click', () => {
-                homeContainer.style.display = "none";
-                contactsContainer.style.display = "none";
-                projectsContainer.style.display = "flex";
-                projectsFilter.style.opacity = "0.9";
-                showBrandTitles();
-                resetBrandContainer();
-            });
+        document.querySelector('#projects-button-pc').addEventListener('click', () => {
+            homeContainer.style.display = "none";
+            contactsContainer.style.display = "none";
+            projectsContainer.style.visibility = "visible";
+            projectsFilter.style.opacity = "0.9";
+            console.log("Projects button clicked");
+
+            const imageContainer = document.querySelector(".image-container-pc");
+            imageContainer.classList.remove("hide");
+            imageContainer.classList.add("show");
+
+            showBrandTitles();
+            resetBrandContainer();
         });
 
         document.querySelectorAll('#contact-button').forEach(button => {
             button.addEventListener('click', () => {
                 contactsContainer.style.display = "flex";
                 homeContainer.style.display = "none";
-                projectsContainer.style.display = "none";
+                projectsContainer.style.visibility = "hidden";
                 projectsFilter.style.opacity = "0.9";
+
+                const imageContainer = document.querySelector(".image-container-pc");
+                imageContainer.classList.remove("show");
+                imageContainer.classList.add("hide");
+
                 resetBrandContainer();
             });
         });
@@ -76,7 +95,7 @@ function start() {
             headerCecco.style.top = "0"; // Mostra l'header con una transizione verso il basso
         });
 
-    }   catch (error) {
+    } catch (error) {
         console.error("Error loading components:", error);
     }
 }
@@ -91,14 +110,12 @@ function showBrandTitles() {
 //SPECIALIZZAZIONE PER PC, ATTENTO AL TELEFONO
 
 function updateBrandDetails(brand) {
-    const brandImageElements = document.querySelectorAll('.brand-images'); // Select all elements with class 'brand-images'
+    const brandImageElements = document.querySelectorAll('.brand-images'); 
     const brandDescriptionElement = document.querySelector('.brand-description');
     const pcBrandDescriptionElement = document.querySelector('.pc-brand-description');
     const brandTitleElement = document.querySelector('.brand-title');
     const brandNameElement = document.querySelector('.brand-name');
     const projectsButton = document.getElementById("projects-button");
-
-    console.log(brand);
 
     if (brandImageElements.length && brandDescriptionElement && brandTitleElement && pcBrandDescriptionElement) {
         brandImageElements.forEach(element => {
@@ -107,7 +124,8 @@ function updateBrandDetails(brand) {
         brandDescriptionElement.textContent = brand.description;
         pcBrandDescriptionElement.textContent = brand.description;
 
-        brandNameElement.style.display = 'block';
+        console.log('updateBrandDetails', brand);
+        brandNameElement.style.visibility = "visible";
         brandTitleElement.style.display = 'none';
         brandImageElements.forEach(element => element.style.display = 'block');
         brandDescriptionElement.style.display = 'block';
@@ -117,20 +135,20 @@ function updateBrandDetails(brand) {
 }
 
 function resetBrandContainer() {
-    const brandImageElements = document.querySelectorAll('.brand-images'); // Select all elements with class 'brand-images'
+    const brandImageElements = document.querySelectorAll('.brand-images'); 
     const brandDescriptionElement = document.querySelector('.brand-description');
     const pcBrandDescriptionElement = document.querySelector('.pc-brand-description');
     const brandNameElement = document.querySelector('.brand-name');
     const brandTitleElement = document.querySelector('.brand-title');
     const projectsButton = document.getElementById("projects-button");
 
-    if (brandImageElements.length && brandDescriptionElement && brandNameElement 
+    if (brandImageElements.length && brandDescriptionElement && brandNameElement
         && brandTitleElement && pcBrandDescriptionElement) {
         brandTitleElement.style.display = 'block';
         brandImageElements.forEach(element => element.style.display = 'none');
         brandDescriptionElement.style.display = 'none';
         pcBrandDescriptionElement.style.display = 'none';
-        brandNameElement.style.display = 'none';
+        brandNameElement.style.visibility = "hidden";
         projectsButton.textContent = "PROJECTS";
     }
 }
@@ -238,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             renderer.render(scene, camera);
         }
-        
+
         animate();
     }, undefined, function (error) {
         console.error(error);
@@ -268,7 +286,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 brandTitleElement.appendChild(brandNameElement);
             });
 
-            // Populate pc-brand-description and brand-images with the first brand's details
             if (pcBrandDescriptionElement) {
                 pcBrandDescriptionElement.textContent = brandData[brandNames[0]].description;
             }
@@ -279,7 +296,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
-                    
+
     const firebaseConfig = {
         apiKey: "AIzaSyDm18l5VH6gxrC-33uA7xNDIGfzPpgOr_s",
         authDomain: "storage-cecco.firebaseapp.com",
@@ -313,16 +330,16 @@ function handleFirstInteraction() {
     const headerCecco = document.querySelector(".header-cecco");
     const headerCeccoSm = document.querySelector(".header-cecco-sm");
     const menuBottom = document.querySelector(".menu-bottom");
-    
+
     headerCecco.style.transition = "top 1s ease"; // Add transition effect
     headerCecco.style.top = "0"; // Show the header with a downward transition
-    
+
     headerCeccoSm.style.transition = "top 1s ease"; // Add transition effect for small header
     headerCeccoSm.style.top = "0"; // Show the small header with a downward transition
-    
+
     menuBottom.style.transition = "bottom 1s ease"; // Add transition effect for menu-bottom
     menuBottom.style.bottom = "30px"; // Show the menu-bottom with an upward transition
-    
+
     document.removeEventListener("click", handleFirstInteraction); // Remove the event listener after the first interaction
     document.removeEventListener("touchstart", handleFirstInteraction); // Remove the event listener after the first interaction
 }
