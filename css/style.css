@@ -126,6 +126,7 @@ header a {
     width: 100%;
     left: 0;
     visibility: hidden;
+    transition: visibility 2s, opacity 2s linear;
 }
 
 @media (max-width: 768px) {

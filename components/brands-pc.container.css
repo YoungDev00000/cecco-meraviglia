@@ -1,24 +1,16 @@
-.top-brands {
-    margin-top: 150px;
-}
-
 .pc-brand-description {
+    margin-top: 200px;
     color: var(--color);
-    font-size: 8px;
+    font-size: 12px;
     font-family: 'Whyte-Medium', sans-serif;
 }
 
-/*brand-title {
-    display: block !important;
-}*/
-
-
-.brand-title div {
+.brand-title {
+    margin-top: 200px;
     color: var(--color);
     font-size: 12px;
     font-family: 'Whyte-Medium', sans-serif;
     cursor: pointer;
-    opacity: 0;
     /* Start with opacity 0 */
 }
 

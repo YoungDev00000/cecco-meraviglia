@@ -2,8 +2,8 @@ export default function loadComponents() {
     return Promise.all([
       loadView("./components/contacts.html", "contacts-container", ContactsContainer),
       loadView("./components/home.html", "home-container", HomeContainer),
-      loadView("./components/projects.html", "projects-container", ProjectsContainer),
-      loadView("./components/brands.html", "brands-container", BrandsContainer),
+      loadView("./components/projects-pc.container.html", "projects-container-pc", ProjectsContainer),
+      loadView("./components/brands-pc.container.html", "brands-container", BrandsContainer),
     ]);
   }
   

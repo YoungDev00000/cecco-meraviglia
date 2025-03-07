@@ -1,4 +1,5 @@
-.projects-container {
+/* Add your CSS styles here */
+.projects-container-pc {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -15,11 +16,6 @@
     margin: 0 auto;
 }
 
-.image-container {
-    padding: 0;
-    margin: 0;
-}
-
 .brand-name {
     color: var(--color);
     font-size: 12px;
@@ -34,22 +30,13 @@
     font-family: 'Whyte-Medium', sans-serif;
 }
 
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 30px;
-    color: #fff;
-    cursor: pointer;
-}
-
 .image-container-pc {
     height: 100vh;
     object-fit: cover;
-    display: flex;
+    position: absolute;
     justify-content: center;
     align-items: center;
-    padding-right: 85px;
+    padding-right: 205px;
     z-index: 11;
     transition: transform 2s ease;
 }
@@ -70,7 +57,7 @@
         margin-top: 10px;
     }
 
-    .brand-images {
+    .brand-image {
         display: none; /*WIP display image   visibility: hidden;    */
         width: 100%;
         height: auto;
@@ -85,17 +72,12 @@
         display: none;
     }
 
-    /*.brands-container {
-        display: none;
-    }*/
-
-
 }
 
 /* PER PC */
 @media (min-width: 768px) {
 
-    .brand-images {
+    .brand-image {
         width: auto;
     }
 }

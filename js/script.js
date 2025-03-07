@@ -1,7 +1,5 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 import loadComponents from "./components.js";
+import ProjectsPc from "../components/projects-pc.container.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     loadComponents().then(() => {
@@ -11,19 +9,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function start() {
     try {
+        new ProjectsPc();
+
+        var headerCecco = document.querySelector(".header-cecco");
+        var projectsFilter = document.getElementById("filtro-progetti");
+        var projectsButton = document.getElementById("projects-button");
+        const imageContainer = document.querySelector(".image-container-pc");
+
         var homeContainer = document.getElementById("home");
         var contactsContainer = document.getElementById("contacts");
         var projectsContainer = document.getElementById("projects");
-        var projectsFilter = document.getElementById("filtro-progetti");
-        var projectsButton = document.getElementById("projects-button");
-        var headerCecco = document.querySelector(".header-cecco");
+        var brandsComponent = document.querySelector(".brands-container");
 
         homeContainer.style.display = "flex";
         homeContainer.style.position = "absolute";
         contactsContainer.style.display = "none";
         projectsContainer.style.visibility = "hidden";
+        brandsComponent.style.display = "none";
 
-        const imageContainer = document.querySelector(".image-container-pc");
         imageContainer.classList.remove("show");
         imageContainer.classList.add("hide");
 
@@ -35,29 +38,23 @@ function start() {
                 homeContainer.style.display = "flex";
                 contactsContainer.style.display = "none";
                 projectsContainer.style.visibility = "hidden";
-                projectsFilter.style.opacity = "0";
-                resetBrandContainer();
 
-                const imageContainer = document.querySelector(".image-container-pc");
+                brandsComponent.style.display = "none";
+                projectsFilter.style.opacity = "0";
+
                 imageContainer.classList.remove("show");
                 imageContainer.classList.add("hide");
             });
         });
         
-        //gestione lista brand
         projectsButton.addEventListener('click', () => {
             if (projectsButton.textContent === "BACK") {
-                    resetBrandContainer();
                     projectsButton.textContent = "PROJECTS";
                 } else {
                     homeContainer.style.display = "none";
                     contactsContainer.style.display = "none";
-                    projectsContainer.style.visibility = "visible";
 
                     projectsFilter.style.opacity = "0.9";
-
-                    showBrandTitles();
-                    //resetBrandContainer();
                 }
         });
 
@@ -65,15 +62,12 @@ function start() {
             homeContainer.style.display = "none";
             contactsContainer.style.display = "none";
             projectsContainer.style.visibility = "visible";
-            projectsFilter.style.opacity = "0.9";
-            console.log("Projects button clicked");
 
-            const imageContainer = document.querySelector(".image-container-pc");
+            brandsComponent.style.display = "block";
+            projectsFilter.style.opacity = "0.9";
+
             imageContainer.classList.remove("hide");
             imageContainer.classList.add("show");
-
-            showBrandTitles();
-            resetBrandContainer();
         });
 
         document.querySelectorAll('#contact-button').forEach(button => {
@@ -81,13 +75,12 @@ function start() {
                 contactsContainer.style.display = "flex";
                 homeContainer.style.display = "none";
                 projectsContainer.style.visibility = "hidden";
+
+                brandsComponent.style.display = "none";
                 projectsFilter.style.opacity = "0.9";
 
-                const imageContainer = document.querySelector(".image-container-pc");
                 imageContainer.classList.remove("show");
                 imageContainer.classList.add("hide");
-
-                resetBrandContainer();
             });
         });
 
@@ -100,59 +93,7 @@ function start() {
     }
 }
 
-function showBrandTitles() {
-    const brandTitleElements = document.querySelectorAll('.brand-title div');
-    brandTitleElements.forEach(element => {
-        element.style.opacity = 1;
-    });
-}
-
-//SPECIALIZZAZIONE PER PC, ATTENTO AL TELEFONO
-
-function updateBrandDetails(brand) {
-    const brandImageElements = document.querySelectorAll('.brand-images'); 
-    const brandDescriptionElement = document.querySelector('.brand-description');
-    const pcBrandDescriptionElement = document.querySelector('.pc-brand-description');
-    const brandTitleElement = document.querySelector('.brand-title');
-    const brandNameElement = document.querySelector('.brand-name');
-    const projectsButton = document.getElementById("projects-button");
-
-    if (brandImageElements.length && brandDescriptionElement && brandTitleElement && pcBrandDescriptionElement) {
-        brandImageElements.forEach(element => {
-            element.src = brand.images; // Update each brand image element
-        });
-        brandDescriptionElement.textContent = brand.description;
-        pcBrandDescriptionElement.textContent = brand.description;
-
-        console.log('updateBrandDetails', brand);
-        brandNameElement.style.visibility = "visible";
-        brandTitleElement.style.display = 'none';
-        brandImageElements.forEach(element => element.style.display = 'block');
-        brandDescriptionElement.style.display = 'block';
-        pcBrandDescriptionElement.style.display = 'block';
-        projectsButton.textContent = "BACK";
-    }
-}
-
-function resetBrandContainer() {
-    const brandImageElements = document.querySelectorAll('.brand-images'); 
-    const brandDescriptionElement = document.querySelector('.brand-description');
-    const pcBrandDescriptionElement = document.querySelector('.pc-brand-description');
-    const brandNameElement = document.querySelector('.brand-name');
-    const brandTitleElement = document.querySelector('.brand-title');
-    const projectsButton = document.getElementById("projects-button");
-
-    if (brandImageElements.length && brandDescriptionElement && brandNameElement
-        && brandTitleElement && pcBrandDescriptionElement) {
-        brandTitleElement.style.display = 'block';
-        brandImageElements.forEach(element => element.style.display = 'none');
-        brandDescriptionElement.style.display = 'none';
-        pcBrandDescriptionElement.style.display = 'none';
-        brandNameElement.style.visibility = "hidden";
-        projectsButton.textContent = "PROJECTS";
-    }
-}
-
+//BACKGROUND: 3d model three.js
 document.addEventListener('DOMContentLoaded', function () {
     const scene = new THREE.Scene();
 
@@ -260,65 +201,6 @@ document.addEventListener('DOMContentLoaded', function () {
         animate();
     }, undefined, function (error) {
         console.error(error);
-    });
-
-    let brandNames = [];
-    let brandData = {};
-    let currentBrandIndex = 0;
-    let currentImageIndex = 0;
-
-    function updateBrandContent() {
-        const brandTitleElement = document.querySelector('.brand-title');
-        const pcBrandDescriptionElement = document.querySelector('.pc-brand-description');
-        const brandImageElements = document.querySelectorAll('.brand-images'); // Select all elements with class 'brand-images'
-        if (brandTitleElement && brandNames.length > 0) {
-            brandTitleElement.innerHTML = ''; // Clear existing content
-            brandNames.forEach((brand, index) => {
-                const brandNameElement = document.createElement('div');
-                brandNameElement.textContent = brand;
-                brandNameElement.style.cursor = 'pointer';
-                brandNameElement.style.opacity = 0; // Start with opacity 0
-                brandNameElement.addEventListener('click', () => {
-                    currentBrandIndex = index;
-                    updateBrandDetails(brandData[brand]);
-                    document.querySelector('.brand-name').textContent = brand;
-                });
-                brandTitleElement.appendChild(brandNameElement);
-            });
-
-            if (pcBrandDescriptionElement) {
-                pcBrandDescriptionElement.textContent = brandData[brandNames[0]].description;
-            }
-            if (brandImageElements.length) {
-                brandImageElements.forEach(element => {
-                    element.src = brandData[brandNames[0]].images;
-                });
-            }
-        }
-    }
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyDm18l5VH6gxrC-33uA7xNDIGfzPpgOr_s",
-        authDomain: "storage-cecco.firebaseapp.com",
-        databaseURL: "https://storage-cecco-default-rtdb.europe-west1.firebasedatabase.app",
-        projectId: "storage-cecco",
-        storageBucket: "storage-cecco.firebasestorage.app",
-        messagingSenderId: "711299112703",
-        appId: "1:711299112703:web:dcc4c8d6a7f0639fbbf6ca",
-        measurementId: "G-4V1V6VQ6X2"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    const dbRef = ref(db);
-
-    onValue(dbRef, (snapshot) => {
-        const data = snapshot.val();
-        brandNames = Object.keys(data);
-        brandData = data;
-        currentBrandIndex = 0;
-        currentImageIndex = 0; // Reset image index when loading projects
-        updateBrandContent();
     });
 
 });
