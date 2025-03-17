@@ -36,7 +36,6 @@
     position: absolute;
     justify-content: center;
     align-items: center;
-    padding-right: 205px;
     z-index: 11;
     transition: transform 2s ease;
 }
