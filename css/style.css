@@ -129,6 +129,17 @@ header a {
     transition: visibility 2s, opacity 2s linear;
 }
 
+.project-phone {
+    text-align: center;
+    width: auto;
+    position: static;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 180px); /* Altezza totale meno l'altezza del menu-bottom */
+    margin-bottom: 40px;
+}
+
 @media (max-width: 768px) {
     .home-button {
         position: absolute;
@@ -146,17 +157,6 @@ header a {
     }
     .container-photo-profilo {
         height: 30px;
-    }
-
-    .container-brand {
-        text-align: center;
-        width: auto;
-        position: static;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: calc(100vh - 180px); /* Altezza totale meno l'altezza del menu-bottom */
-        margin-bottom: 40px;
     }
 }
 

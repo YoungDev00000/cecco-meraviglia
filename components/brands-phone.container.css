@@ -1,0 +1,13 @@
+.brand-title-phone {
+    margin-top: 200px;
+    text-align: center;
+    color: var(--color);
+    font-size: 12px;
+    font-family: 'Whyte-Medium', sans-serif;
+    cursor: pointer;
+    /* Start with opacity 0 */
+}
+
+.brand-title-phone :hover {
+    opacity: 0.5;
+}

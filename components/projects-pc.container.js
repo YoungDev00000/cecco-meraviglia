@@ -11,7 +11,6 @@ export default class ProjectsPcContainer {
 
         if (button) {
             button.addEventListener('click', () => {
-                console.log('DISPLAY');
                 const brandsPcContainer = new BrandsPcContainer();
                 this.displayFirstBrandDetails();
             });

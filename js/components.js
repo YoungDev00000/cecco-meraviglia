@@ -3,7 +3,9 @@ export default function loadComponents() {
       loadView("./components/contacts.html", "contacts-container", ContactsContainer),
       loadView("./components/home.html", "home-container", HomeContainer),
       loadView("./components/projects-pc.container.html", "projects-container-pc", ProjectsContainer),
+      loadView("./components/projects-phone.container.html", "projects-container-phone", ProjectsContainerPhone),
       loadView("./components/brands-pc.container.html", "brands-container", BrandsContainer),
+      loadView("./components/brands-phone.container.html", "brands-container-phone", BrandsContainerPhone),
     ]);
   }
   
@@ -48,5 +50,19 @@ export default function loadComponents() {
     constructor() {
       super();
       this.innerHTML = BrandsContainer._html;
+    }
+  }
+
+  class ProjectsContainerPhone extends HTMLElement {
+    constructor() {
+      super();
+      this.innerHTML = ProjectsContainerPhone._html;
+    }
+  }
+
+  class BrandsContainerPhone extends HTMLElement {
+    constructor() {
+      super();
+      this.innerHTML = BrandsContainerPhone._html;
     }
   }

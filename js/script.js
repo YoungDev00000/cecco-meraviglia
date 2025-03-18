@@ -1,5 +1,6 @@
 import loadComponents from "./components.js";
 import ProjectsPc from "../components/projects-pc.container.js";
+import ProjectsPhone from "../components/projects-phone.container.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     loadComponents().then(() => {
@@ -10,34 +11,39 @@ document.addEventListener("DOMContentLoaded", () => {
 function start() {
     try {
         new ProjectsPc();
+        new ProjectsPhone();
 
         var headerCecco = document.querySelector(".header-cecco");
         var projectsFilter = document.getElementById("filtro-progetti");
-        var projectsButton = document.getElementById("projects-button");
+    
         const imageContainer = document.querySelector(".image-container-pc");
 
         var homeContainer = document.getElementById("home");
         var contactsContainer = document.getElementById("contacts");
         var projectsContainer = document.getElementById("projects");
+        var projectsContainerPhone = document.getElementById("projects-phone");
         var brandsComponent = document.querySelector(".brands-container");
 
         homeContainer.style.display = "flex";
         homeContainer.style.position = "absolute";
         contactsContainer.style.display = "none";
-        projectsContainer.style.visibility = "hidden";
         brandsComponent.style.display = "none";
+
+        projectsContainer.style.visibility = "hidden";
+        projectsContainerPhone.style.visibility = "hidden";
 
         imageContainer.classList.remove("show");
         imageContainer.classList.add("hide");
 
         projectsFilter.style.opacity = "0";
-        projectsButton.textContent = "PROJECTS";
+        //projectsContainerPhone.textContent = "PROJECTS";
 
         document.querySelectorAll('#index-button').forEach(button => {
             button.addEventListener('click', () => {
                 homeContainer.style.display = "flex";
                 contactsContainer.style.display = "none";
                 projectsContainer.style.visibility = "hidden";
+                projectsContainerPhone.style.visibility = "hidden";
 
                 brandsComponent.style.display = "none";
                 projectsFilter.style.opacity = "0";
@@ -47,16 +53,16 @@ function start() {
             });
         });
         
-        projectsButton.addEventListener('click', () => {
-            if (projectsButton.textContent === "BACK") {
-                    projectsButton.textContent = "PROJECTS";
+        /*projectsContainerPhone.addEventListener('click', () => {
+            if (projectsContainerPhone.textContent === "BACK") {
+                projectsContainerPhone.textContent = "PROJECTS";
                 } else {
                     homeContainer.style.display = "none";
                     contactsContainer.style.display = "none";
 
                     projectsFilter.style.opacity = "0.9";
                 }
-        });
+        });*/
 
         document.querySelector('#projects-button-pc').addEventListener('click', () => {
             homeContainer.style.display = "none";
@@ -70,11 +76,21 @@ function start() {
             imageContainer.classList.add("show");
         });
 
+        document.querySelector('#projects-button-phone').addEventListener('click', () => {
+            homeContainer.style.display = "none";
+            contactsContainer.style.display = "none";
+            projectsContainerPhone.style.visibility = "visible";
+
+            brandsComponent.style.display = "block";
+            projectsFilter.style.opacity = "0.9";
+        });
+
         document.querySelectorAll('#contact-button').forEach(button => {
             button.addEventListener('click', () => {
                 contactsContainer.style.display = "flex";
                 homeContainer.style.display = "none";
                 projectsContainer.style.visibility = "hidden";
+                projectsContainerPhone.style.visibility = "hidden";
 
                 brandsComponent.style.display = "none";
                 projectsFilter.style.opacity = "0.9";
