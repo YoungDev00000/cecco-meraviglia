@@ -47,22 +47,12 @@ function start() {
 
                 brandsComponent.style.display = "none";
                 projectsFilter.style.opacity = "0";
+                document.getElementById('projects-button-phone').textContent = 'PROJECTS';
 
                 imageContainer.classList.remove("show");
                 imageContainer.classList.add("hide");
             });
         });
-        
-        /*projectsContainerPhone.addEventListener('click', () => {
-            if (projectsContainerPhone.textContent === "BACK") {
-                projectsContainerPhone.textContent = "PROJECTS";
-                } else {
-                    homeContainer.style.display = "none";
-                    contactsContainer.style.display = "none";
-
-                    projectsFilter.style.opacity = "0.9";
-                }
-        });*/
 
         document.querySelector('#projects-button-pc').addEventListener('click', () => {
             homeContainer.style.display = "none";
@@ -94,6 +84,7 @@ function start() {
 
                 brandsComponent.style.display = "none";
                 projectsFilter.style.opacity = "0.9";
+                document.getElementById('projects-button-phone').textContent = 'PROJECTS';
 
                 imageContainer.classList.remove("show");
                 imageContainer.classList.add("hide");

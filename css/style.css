@@ -130,6 +130,7 @@ header a {
 }
 
 .project-phone {
+    display: none;
     text-align: center;
     width: auto;
     position: static;
@@ -266,4 +267,8 @@ html, body {
     width: 100%;
     justify-content: center; 
     align-items: center;
+}
+
+.projects-phone {
+    margin-top: 100px !important;
 }

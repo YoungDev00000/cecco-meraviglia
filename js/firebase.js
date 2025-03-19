@@ -21,7 +21,6 @@ export function fetchBrandNames(callback) {
         const data = snapshot.val();
         if (data) {
             const brandNames = Object.keys(data);
-            console.log(brandNames);
             try {
                 if (typeof callback === 'function') {
                     callback(brandNames);
@@ -44,7 +43,6 @@ export function fetchBrandDescription(brandName) {
             const data = snapshot.val();
             if (data && data[brandName]) {
                 const description = data[brandName].description;
-                console.log(description);
                 resolve(description);
             } else {
                 console.log(`Brand ${brandName} not found.`);
