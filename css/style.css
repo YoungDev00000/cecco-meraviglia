@@ -274,4 +274,5 @@ html, body {
     align-items: center;
     justify-content: center;
     height: 100vh; /* Adjust as needed */
+    margin-bottom: 150px;
 }
