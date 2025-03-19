@@ -270,5 +270,8 @@ html, body {
 }
 
 .projects-phone {
-    margin-top: 100px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Adjust as needed */
 }
